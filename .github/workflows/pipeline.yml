@@ -1,0 +1,38 @@
+name: Playwright API Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4   
+
+      - name: Iniciar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Instalar Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Configurar variável de ambiente do GoRest
+        run: echo "GOREST_TOKEN=${{ secrets.GOREST_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Executar testes 
+        run: npx playwright test --reporter=html
+
+      - name: Upload dos reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
