@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      GOREST_TOKEN: ${{ secrets.GOREST_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -24,9 +26,6 @@ jobs:
 
       - name: Instalar Chromium
         run: npx playwright install chromium --with-deps
-
-      - name: Configurar variável de ambiente do GoRest
-        run: echo "GOREST_TOKEN=${{ secrets.GOREST_TOKEN }}" >> $GITHUB_ENV
 
       - name: Executar testes 
         run: npx playwright test --reporter=html
