@@ -18,7 +18,7 @@ Automação de testes de API usando **Playwright** e **GoRest API**.
 .
 ├── .github/
 │ └── workflows/
-│ └── pipeline.yml # Pipeline CI/CD do GitHub Actions
+│     └── pipeline.yml # Pipeline CI/CD do GitHub Actions
 │
 ├── helpers/
 │   ├── apiClient.js        # Cliente HTTP com autenticação
